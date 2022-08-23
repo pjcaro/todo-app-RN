@@ -20,7 +20,10 @@ const Onboarding = () => {
       </View>
 
       <View style={styles.buttonContainer}>
-        <Button onPress={() => navigate('Login')} textKey="onboarding.button" />
+        <Button
+          onPress={() => navigate('SingUp')}
+          textKey="onboarding.button"
+        />
       </View>
     </BackgroundView>
   );
