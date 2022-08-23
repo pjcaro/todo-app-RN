@@ -1,8 +1,7 @@
 import React from 'react';
-import Onboarding from './src/components/onboarding';
 
-const App = () => {
-  return <Onboarding />;
-};
+import Navigator from './src/nav';
+
+const App = () => <Navigator />;
 
 export default App;
