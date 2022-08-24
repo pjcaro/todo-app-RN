@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, SafeAreaView, Text, View } from 'react-native';
+import { Image, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import styles from './styles';
@@ -21,7 +21,7 @@ const Onboarding = () => {
 
       <View style={styles.buttonContainer}>
         <Button
-          onPress={() => navigate('SingUp')}
+          onPress={() => navigate('SignUp')}
           textKey="onboarding.button"
         />
       </View>

@@ -8,7 +8,6 @@ const styles = {
     fontSize: 18,
     fontWeight: '700',
     lineHeight: 27,
-    marginBottom: 8,
     color: '#000',
   },
   text: {
@@ -17,6 +16,7 @@ const styles = {
     lineHeight: 20,
     textAlign: 'center',
     color: '#000',
+    marginTop: 8,
   },
   info: {
     flex: 1,
