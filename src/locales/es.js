@@ -7,6 +7,10 @@ export default {
     inputTitle: 'Welcome Onboard!',
     inputSubtitle: "Let's help you meet up your tasks.",
     buttonRegister: 'Register',
-    signIn: 'Sign In'
+    signIn: 'Sign In',
+    titleLogin: 'Welcome Back!',
+    buttonLogin: 'Log In',
+    signUp: 'Sign Up',
+    forgetPassword: 'Forget Password'
   },
 };

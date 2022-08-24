@@ -1,20 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import BackgroundView from '../../containers/backgroundView';
 import styles from './styles';
-import Button from '../../components/button';
 import InputForm from '../../components/input';
 import t from '../../services/translate';
 import { useNavigation } from '@react-navigation/native';
-import TextLink from '../../components/text';
+import TextLink from '../../components/text_register';
 import ButtonText from '../../components/buttonText';
 
 const SignUp = () => {
-  const [text, onChangeText] = React.useState('');
-  const [text1, onChangeText1] = React.useState('');
-  const [text2, onChangeText2] = React.useState('');
-  const [text3, onChangeText3] = React.useState('');
+  const [text, onChangeText] = useState('');
+  const [text1, onChangeText1] = useState('');
+  const [text2, onChangeText2] = useState('');
+  const [text3, onChangeText3] = useState('');
   const { navigate } = useNavigation();
 
   return (
