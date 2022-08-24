@@ -33,7 +33,7 @@ const styles = {
     alignContent: 'center',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 79,
+    marginBottom: 35,
   },
   inputContainer: {
     flex: 1,
