@@ -8,13 +8,23 @@ import t from '../../services/translate';
 import { useNavigation } from '@react-navigation/native';
 import Button from '../../components/button';
 import Link from '../../components/link';
+import {userRegister} from '../../services/api';
 
 const SignUp = () => {
-  const [text, onChangeText] = useState('');
-  const [text1, onChangeText1] = useState('');
-  const [text2, onChangeText2] = useState('');
-  const [text3, onChangeText3] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const { navigate } = useNavigation();
+
+  const onSubmit = () => {
+    const data = {
+      name: name,
+      email: email,
+      password: password,
+    };
+    userRegister(data);
+  };
 
   return (
     <BackgroundView>
@@ -25,28 +35,28 @@ const SignUp = () => {
         </View>
         <View style={styles.inputContainer}>
           <InputForm
-            text={text}
-            onChangeText={onChangeText}
+            text={name}
+            onChangeText={setName}
             placeholder={t('sign_up.form.placeholder_name')}
           />
           <InputForm
-            text={text1}
-            onChangeText={onChangeText1}
+            text={email}
+            onChangeText={setEmail}
             placeholder={t('sign_up.form.placeholder_email')}
           />
           <InputForm
-            text={text2}
-            onChangeText={onChangeText2}
+            text={password}
+            onChangeText={setPassword}
             placeholder={t('sign_up.form.placeholder_password')}
           />
           <InputForm
-            text={text3}
-            onChangeText={onChangeText3}
+            text={confirmPassword}
+            onChangeText={setConfirmPassword}
             placeholder={t('sign_up.form.placeholder_confirm_password')}
           />
         </View>
         <View style={styles.buttonContainer}>
-          <Button onPress={() => navigate('Login')} textKey="sign_up.button" />
+          <Button onPress={onSubmit} textKey="sign_up.button" />
           <View style={{ flexDirection: 'row' }}>
             <Text style={styles.textQuestion}>Already have an account ?</Text>
             <Link
