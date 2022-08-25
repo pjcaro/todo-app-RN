@@ -15,11 +15,8 @@ const instance = axios.create({
   headers: HEADERS,
 });
 
-const userRegister = data => {
-  instance
-    .post(REGISTER_URL, data)
-    .then(res => console.log(res))
-    .catch(err => console.log(JSON.stringify(err)));
+const userRegister = async data => {
+  return instance.post(REGISTER_URL, data).then(res => res);
 };
 
 const userLogin = data => {

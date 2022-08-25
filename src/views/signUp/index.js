@@ -17,13 +17,18 @@ const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const { navigate } = useNavigation();
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     const data = {
       name: name,
       email: email,
       password: password,
     };
-    userRegister(data);
+    try {
+      const response = await userRegister(data);
+      console.tron.log('response: ', response);
+    } catch (e) {
+      console.log('error: ', e);
+    }
   };
 
   return (
