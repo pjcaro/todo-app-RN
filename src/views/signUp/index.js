@@ -8,7 +8,7 @@ import t from '../../services/translate';
 import { useNavigation } from '@react-navigation/native';
 import Button from '../../components/button';
 import Link from '../../components/link';
-import {userRegister} from '../../services/api';
+import { userRegister } from '../../services/api';
 
 const SignUp = () => {
   const [name, setName] = useState('');

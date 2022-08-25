@@ -1,21 +1,30 @@
 import axios from 'axios';
 
-const TOKEN = `Bearer ${process.env.REACT_APP_TOKEN}`;
 const BASE_URL = 'https://api-nodejs-todolist.herokuapp.com';
 
+const HEADERS = {
+  'Content-Type': 'application/json',
+};
+
+const REGISTER_URL = '/user/register';
+const LOGIN_URL = '/user/login';
+
+const instance = axios.create({
+  baseURL: BASE_URL,
+  timeout: 40000,
+  headers: HEADERS,
+});
+
 const userRegister = data => {
-  axios
-    .post(`${BASE_URL}/user/register`, data, {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    })
+  instance
+    .post(REGISTER_URL, data)
     .then(res => console.log(res))
-    .catch(err => console.log(err));
+    .catch(err => console.log(JSON.stringify(err)));
 };
 
 const userLogin = data => {
-  axios
-    .post(`${BASE_URL}/user/login`, data)
+  instance
+    .post(LOGIN_URL, data)
     .then(res => console.log(res))
     .catch(err => console.log(err));
 };
