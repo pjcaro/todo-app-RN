@@ -6,9 +6,8 @@ import t from '../../services/translate';
 import images from '../../assets';
 import BackgroundView from '../../containers/backgroundView';
 import InputForm from '../../components/input';
-import ButtonText from '../../components/buttonText';
-import TextLogin from '../../components/text_login';
-import ForgetPassword from '../../components/forget_password';
+import Button from '../../components/button';
+import Link from '../../components/link';
 
 const Login = () => {
   const [text, onChangeText] = useState('');
@@ -36,16 +35,22 @@ const Login = () => {
         />
       </View>
       <View style={styles.textContainer}>
-        <ForgetPassword textKey="onboarding.forgetPassword" />
+        <Link
+          textKey="onboarding.forgetPassword"
+          onPress={() => navigate('Home')}
+        />
       </View>
       <View style={styles.buttonContainer}>
-        <ButtonText
-          onPress={() => navigate('Login')}
+        <Button
+          onPress={() => navigate('Home')}
           textKey="onboarding.buttonLogin"
         />
         <View style={{ flexDirection: 'row' }}>
           <Text style={styles.textQuestion}>Don’t have an account?</Text>
-          <TextLogin textKey="onboarding.signUp" />
+          <Link
+            onPress={() => navigate('SignUp')}
+            textKey="onboarding.signUp"
+          />
         </View>
       </View>
     </BackgroundView>

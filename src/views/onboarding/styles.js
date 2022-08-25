@@ -26,6 +26,7 @@ const styles = {
   },
   buttonContainer: {
     marginHorizontal: 25,
+    marginBottom: 70
   },
 };
 

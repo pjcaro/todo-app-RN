@@ -5,7 +5,6 @@ const styles = {
     paddingVertical: 16,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 70,
     borderRadius: 20,
   },
   textButton: {
