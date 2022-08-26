@@ -11,10 +11,10 @@ import Link from '../../components/link';
 import { userRegister } from '../../services/api';
 
 const SignUp = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [name, setName] = useState('test');
+  const [email, setEmail] = useState('pablo@mail.com');
+  const [password, setPassword] = useState('pablo1234');
+  const [confirmPassword, setConfirmPassword] = useState('pablo1234');
   const [errorMessage, setErrorMessage] = useState('');
   const { navigate } = useNavigation();
 
@@ -48,7 +48,9 @@ const SignUp = () => {
 
   return (
     <BackgroundView>
-      <KeyboardAwareScrollView>
+      <KeyboardAwareScrollView
+        bounces={false}
+        contentContainerStyle={{ flexGrow: 1 }}>
         <View style={styles.info}>
           <Text style={styles.title}>{t('sign_up.title')}</Text>
           <Text style={styles.text}>{t('sign_up.subtitle')}</Text>
