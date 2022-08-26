@@ -1,23 +1,21 @@
 import React, { useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
 import Onboarding from '../views/onboarding';
 import SignUp from '../views/signUp';
 import Login from '../views/login';
-import { AuthContext } from '../../App';
 import Home from '../views/home';
+import { AuthContext } from '../context';
 
 const Stack = createNativeStackNavigator();
 
 const Navigator = () => {
-  const authContext = useContext(AuthContext);
-
-  console.tron.log('auth: ', authContext);
+  const { user } = useContext(AuthContext);
+  console.tron.log('auth: ', user);
 
   return (
     <NavigationContainer>
-      {authContext.isLoggedIn ? (
+      {user?.isLoggedIn ? (
         <Stack.Navigator
           screenOptions={{ headerShown: false }}
           initialRouteName="Home">

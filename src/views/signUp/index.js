@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Alert, Text, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import BackgroundView from '../../containers/backgroundView';
@@ -9,14 +9,16 @@ import { useNavigation } from '@react-navigation/native';
 import Button from '../../components/button';
 import Link from '../../components/link';
 import { userRegister } from '../../services/api';
+import { AuthContext } from '../../context';
 
 const SignUp = () => {
   const [name, setName] = useState('test');
-  const [email, setEmail] = useState('pablo@mail.com');
+  const [email, setEmail] = useState('pabloo2@mail.com');
   const [password, setPassword] = useState('pablo1234');
   const [confirmPassword, setConfirmPassword] = useState('pablo1234');
   const [errorMessage, setErrorMessage] = useState('');
   const { navigate } = useNavigation();
+  const { login } = useContext(AuthContext);
 
   const onSubmit = async () => {
     setErrorMessage('');
@@ -39,6 +41,7 @@ const SignUp = () => {
     };
     try {
       const response = await userRegister(data);
+      login({...response.data})
       console.tron.log('response: ', response);
     } catch (e) {
       setErrorMessage(e.response.data);
