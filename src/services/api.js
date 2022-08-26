@@ -1,6 +1,7 @@
 import axios from 'axios';
+import Config from 'react-native-config';
 
-const BASE_URL = 'http://192.168.100.174:3000';
+const BASE_URL = Config.BASE_URL;
 
 const HEADERS = {
   'Content-Type': 'application/json',
