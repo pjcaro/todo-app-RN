@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://api-nodejs-todolist.herokuapp.com';
+const BASE_URL = 'http://192.168.100.174:3000';
 
 const HEADERS = {
   'Content-Type': 'application/json',
@@ -16,7 +16,7 @@ const instance = axios.create({
 });
 
 const userRegister = async data => {
-  return instance.post(REGISTER_URL, data).then(res => res);
+  return instance.post(REGISTER_URL, data);
 };
 
 const userLogin = data => {

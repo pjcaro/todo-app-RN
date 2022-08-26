@@ -25,13 +25,11 @@ const Login = () => {
           text={text}
           onChangeText={onChangeText}
           placeholder={'Enter your e-mail'}
-          placeholderTextColor="#000"
         />
         <InputForm
           text={text1}
           onChangeText={onChangeText1}
           placeholder={'Confirm password'}
-          placeholderTextColor="#000"
         />
       </View>
       <View style={styles.textContainer}>

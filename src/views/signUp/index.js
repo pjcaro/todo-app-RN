@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View } from 'react-native';
+import { Alert, Text, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import BackgroundView from '../../containers/backgroundView';
 import styles from './styles';
@@ -15,9 +15,23 @@ const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const { navigate } = useNavigation();
 
   const onSubmit = async () => {
+    setErrorMessage('');
+
+    if (password.length == 0) {
+      Alert.alert('La contraseña es requerida');
+      return;
+    } else if (password.length < 7) {
+      Alert.alert('La contraseña no puede ser menor a 7 caracteres');
+      return;
+    } else if (password !== confirmPassword) {
+      Alert.alert('Las contraseñas no coinciden');
+      return;
+    }
+
     const data = {
       name: name,
       email: email,
@@ -27,7 +41,8 @@ const SignUp = () => {
       const response = await userRegister(data);
       console.tron.log('response: ', response);
     } catch (e) {
-      console.log('error: ', e);
+      setErrorMessage(e.response.data);
+      console.tron.log('error: ', e.response.data);
     }
   };
 
@@ -53,12 +68,15 @@ const SignUp = () => {
             text={password}
             onChangeText={setPassword}
             placeholder={t('sign_up.form.placeholder_password')}
+            secureTextEntry
           />
           <InputForm
             text={confirmPassword}
             onChangeText={setConfirmPassword}
             placeholder={t('sign_up.form.placeholder_confirm_password')}
+            secureTextEntry
           />
+          <Text>{errorMessage}</Text>
         </View>
         <View style={styles.buttonContainer}>
           <Button onPress={onSubmit} textKey="sign_up.button" />
