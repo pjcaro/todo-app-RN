@@ -1,21 +1,23 @@
 import React, { useContext, useState } from 'react';
 import { Alert, Text, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import BackgroundView from '../../containers/backgroundView';
+import { useNavigation } from '@react-navigation/native';
+
 import styles from './styles';
 import InputForm from '../../components/input';
 import t from '../../services/translate';
-import { useNavigation } from '@react-navigation/native';
 import Button from '../../components/button';
 import Link from '../../components/link';
 import { userRegister } from '../../services/api';
 import { AuthContext } from '../../context';
+import BackgroundView from '../../containers/backgroundView';
+
 
 const SignUp = () => {
   const [name, setName] = useState('test');
-  const [email, setEmail] = useState('pabloo2@mail.com');
-  const [password, setPassword] = useState('pablo1234');
-  const [confirmPassword, setConfirmPassword] = useState('pablo1234');
+  const [email, setEmail] = useState('test1@mail.com');
+  const [password, setPassword] = useState('1234567');
+  const [confirmPassword, setConfirmPassword] = useState('1234567');
   const [errorMessage, setErrorMessage] = useState('');
   const { navigate } = useNavigation();
   const { login } = useContext(AuthContext);

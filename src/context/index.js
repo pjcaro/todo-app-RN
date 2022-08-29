@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import LocalStorage from '../services/localStorage';
 
 const auth = {
   user: undefined,
@@ -17,10 +18,12 @@ export const UserProvider = ({ children }) => {
       isLoggedIn: true,
       token,
     });
+    LocalStorage.setItem('token', token);
   };
 
   const logout = () => {
     setUser(auth);
+    LocalStorage.removeItem('token')
   };
 
   return (
