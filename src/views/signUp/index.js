@@ -11,7 +11,7 @@ import Link from '../../components/link';
 import { userRegister } from '../../services/api';
 import { AuthContext } from '../../context';
 import BackgroundView from '../../containers/backgroundView';
-
+import { showFlashMessage } from '../../components/flashMessage';
 
 const SignUp = () => {
   const [name, setName] = useState('test');
@@ -26,7 +26,10 @@ const SignUp = () => {
     setErrorMessage('');
 
     if (password.length == 0) {
-      Alert.alert('La contraseña es requerida');
+      showFlashMessage({
+        message: 'La contraseña es requerida',
+        type: 'danger',
+      });
       return;
     } else if (password.length < 7) {
       Alert.alert('La contraseña no puede ser menor a 7 caracteres');
@@ -43,7 +46,7 @@ const SignUp = () => {
     };
     try {
       const response = await userRegister(data);
-      login({...response.data})
+      login({ ...response.data });
       console.tron.log('response: ', response);
     } catch (e) {
       setErrorMessage(e.response.data);

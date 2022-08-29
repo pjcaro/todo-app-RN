@@ -1,6 +1,7 @@
 import React from 'react';
 import { UserProvider } from './src/context';
 import Navigator from './src/nav';
+import FlashMessageComponent from './src/components/flashMessage';
 
 if (__DEV__) {
   import('./ReactotronConfig').then(() => console.log('Reactotron Configured'));
@@ -9,6 +10,7 @@ if (__DEV__) {
 const App = () => (
   <UserProvider>
     <Navigator />
+    <FlashMessageComponent />
   </UserProvider>
 );
 
