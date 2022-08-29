@@ -27,15 +27,21 @@ const SignUp = () => {
 
     if (password.length == 0) {
       showFlashMessage({
-        message: 'La contraseña es requerida',
+        message: t('input_validation.password_required'),
         type: 'danger',
       });
       return;
     } else if (password.length < 7) {
-      Alert.alert('La contraseña no puede ser menor a 7 caracteres');
+      showFlashMessage({
+        message: t('input_validation.password_length'),
+        type: 'danger',
+      });
       return;
     } else if (password !== confirmPassword) {
-      Alert.alert('Las contraseñas no coinciden');
+      showFlashMessage({
+        message: t('input_validation.password_compare'),
+        type: 'danger',
+      });
       return;
     }
 
@@ -50,6 +56,11 @@ const SignUp = () => {
       console.tron.log('response: ', response);
     } catch (e) {
       setErrorMessage(e.response.data);
+      showFlashMessage({
+        message: t('input_validation.backend_error'),
+        description: e.response.data,
+        type: 'danger',
+      });
       console.tron.log('error: ', e.response.data);
     }
   };
@@ -86,12 +97,11 @@ const SignUp = () => {
             placeholder={t('sign_up.form.placeholder_confirm_password')}
             secureTextEntry
           />
-          <Text>{errorMessage}</Text>
         </View>
         <View style={styles.buttonContainer}>
           <Button onPress={onSubmit} textKey="sign_up.button" />
           <View style={{ flexDirection: 'row' }}>
-            <Text style={styles.textQuestion}>Already have an account ?</Text>
+            <Text style={styles.textQuestion}>{t('sign_up.question')}</Text>
             <Link
               onPress={() => navigate('Login')}
               textKey="sign_up.sign_in_button"

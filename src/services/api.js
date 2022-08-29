@@ -20,11 +20,8 @@ const userRegister = async data => {
   return instance.post(REGISTER_URL, data);
 };
 
-const userLogin = data => {
-  instance
-    .post(LOGIN_URL, data)
-    .then(res => console.log(res))
-    .catch(err => console.log(err));
+const userLogin = async data => {
+  return instance.post(LOGIN_URL, data);
 };
 
 export { userRegister, userLogin };

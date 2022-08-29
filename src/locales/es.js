@@ -5,10 +5,8 @@ export default {
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in volutpat, tristique lacinia ut. Elementum non turpis nullam ipsum.',
     button: 'Get Started',
 
-    titleLogin: 'Welcome Back!',
     buttonLogin: 'Log In',
     signUp: 'Sign Up',
-    forgetPassword: 'Forget Password',
   },
   sign_up: {
     title: 'Welcome Onboard!',
@@ -20,6 +18,31 @@ export default {
       placeholder_email: 'Enter your e-mail',
       placeholder_password: 'Enter your password',
       placeholder_confirm_password: 'Confirm password',
-    }
+    },
+    question: 'Already have an account ?',
   },
+  sign_in: {
+    button: 'Login',
+    forgetPassword: 'Forget Password',
+    sign_up_button: 'Sign Up',
+    title: 'Welcome Back!',
+    form: {
+      placeholder_email: 'Enter your e-mail',
+      placeholder_confirm_password: 'Confirm password',
+    },
+    question: 'Don’t have an account?',
+  },
+  input_validation: {
+    password_required: 'La contraseña es requerida',
+    password_length: 'La contraseña no puede ser menor a 7 caracteres',
+    password_compare: 'Las contraseñas no coinciden',
+    backend_error: 'Error'
+  },
+  alerts: {
+    login: 'Login exitoso',
+    logout: 'Logout exitoso'
+  },
+  home: {
+    welcome: 'Bienvenido!'
+  }
 };

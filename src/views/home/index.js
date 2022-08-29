@@ -15,7 +15,7 @@ const Home = () => {
     <BackgroundView>
       <View style={styles.info}>
         <Image source={images.onboarding} style={styles.image} />
-        <Text style={styles.title}>{t('Bienvenido!')}</Text>
+        <Text style={styles.title}>{t('home.welcome')}</Text>
       </View>
       <Button onPress={logout} textKey={t('Logout')} />
     </BackgroundView>

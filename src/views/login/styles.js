@@ -39,7 +39,7 @@ const styles = {
   textContainer: {
     flex: 1,
     alignItems: 'center',
-    marginTop: 59,
+    marginTop: 35,
     marginBottom: 59,
   },
 };

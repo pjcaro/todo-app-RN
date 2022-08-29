@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { showFlashMessage } from '../components/flashMessage';
 import LocalStorage from '../services/localStorage';
+import t from '../services/translate';
 
 const auth = {
   user: undefined,
@@ -19,11 +21,19 @@ export const UserProvider = ({ children }) => {
       token,
     });
     LocalStorage.setItem('token', token);
+    showFlashMessage({
+      message: t('alerts.login'),
+      type: 'success',
+    });
   };
 
   const logout = () => {
     setUser(auth);
     LocalStorage.removeItem('token')
+    showFlashMessage({
+      message: t('alerts.logout'),
+      type: 'info',
+    });
   };
 
   return (

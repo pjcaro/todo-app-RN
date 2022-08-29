@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Image, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
@@ -8,46 +8,84 @@ import BackgroundView from '../../containers/backgroundView';
 import InputForm from '../../components/input';
 import Button from '../../components/button';
 import Link from '../../components/link';
+import { userLogin } from '../../services/api';
+import { AuthContext } from '../../context';
+import { showFlashMessage } from '../../components/flashMessage';
 
 const Login = () => {
-  const [text, onChangeText] = useState('');
-  const [text1, onChangeText1] = useState('');
+  const [email, setEmail] = useState('facu@mail.com');
+  const [password, setPassword] = useState('1234567');
+  const [errorMessage, setErrorMessage] = useState('');
+  const { login } = useContext(AuthContext);
   const { navigate } = useNavigation();
+
+  const onSubmit = async () => {
+    setErrorMessage('');
+
+    if (password.length == 0) {
+      showFlashMessage({
+        message: t('input_validation.password_required'),
+        type: 'danger',
+      });
+      return;
+    } else if (password.length < 7) {
+      showFlashMessage({
+        message: t('input_validation.password_length'),
+        type: 'danger',
+      });
+      return;
+    }
+
+    const data = {
+      email: email,
+      password: password,
+    };
+    try {
+      const response = await userLogin(data);
+      login({ ...response.data });
+      console.tron.log('response: ', response);
+    } catch (e) {
+      setErrorMessage(e.response.data);
+      showFlashMessage({
+        message: e.response.data,
+        type: 'danger',
+      });
+      console.tron.log('error: ', e.response.data);
+    }
+  };
 
   return (
     <BackgroundView>
       <View style={styles.info}>
-        <Text style={styles.title}>{t('onboarding.titleLogin')}</Text>
+        <Text style={styles.title}>{t('sign_in.title')}</Text>
         <Image source={images.login} style={styles.image} />
       </View>
       <View style={styles.inputContainer}>
         <InputForm
-          text={text}
-          onChangeText={onChangeText}
-          placeholder={'Enter your e-mail'}
+          text={email}
+          onChangeText={setEmail}
+          placeholder={t('sign_in.form.placeholder_email')}
         />
         <InputForm
-          text={text1}
-          onChangeText={onChangeText1}
-          placeholder={'Confirm password'}
+          text={password}
+          onChangeText={setPassword}
+          placeholder={t('sign_in.form.placeholder_confirm_password')}
+          secureTextEntry
         />
       </View>
       <View style={styles.textContainer}>
         <Link
-          textKey="onboarding.forgetPassword"
-          onPress={() => navigate('Home')}
+          textKey="sign_in.forgetPassword"
+          onPress={() => navigate('SignUp')}
         />
       </View>
       <View style={styles.buttonContainer}>
-        <Button
-          onPress={() => navigate('Home')}
-          textKey="onboarding.buttonLogin"
-        />
+        <Button onPress={onSubmit} textKey="sign_in.button" />
         <View style={{ flexDirection: 'row' }}>
-          <Text style={styles.textQuestion}>Don’t have an account?</Text>
+          <Text style={styles.textQuestion}>{t('sign_in.question')}</Text>
           <Link
             onPress={() => navigate('SignUp')}
-            textKey="onboarding.signUp"
+            textKey="sign_in.sign_up_button"
           />
         </View>
       </View>
