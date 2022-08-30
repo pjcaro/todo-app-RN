@@ -36,13 +36,19 @@ export default {
     password_required: 'La contraseña es requerida',
     password_length: 'La contraseña no puede ser menor a 7 caracteres',
     password_compare: 'Las contraseñas no coinciden',
-    backend_error: 'Error'
+    backend_error: 'Error',
+    task_required: 'Task cannot be empty'
   },
   alerts: {
     login: 'Login exitoso',
-    logout: 'Logout exitoso'
+    logout: 'Logout exitoso',
   },
   home: {
-    title: 'Tu lista de Tareas'
-  }
+    title: 'Tu lista de Tareas',
+  },
+  create_task: {
+    placeholder_create_task: 'Add task',
+    button: 'Create Task',
+    return: 'Return'
+  },
 };

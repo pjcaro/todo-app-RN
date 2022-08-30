@@ -8,6 +8,7 @@ import Home from '../views/home';
 import { AuthContext } from '../context';
 import LocalStorage from '../services/localStorage';
 import { ActivityIndicator, View } from 'react-native';
+import CreateTask from '../views/createTask';
 
 const Stack = createNativeStackNavigator();
 
@@ -41,6 +42,7 @@ const Navigator = () => {
           screenOptions={{ headerShown: false }}
           initialRouteName="Home">
           <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="CreateTask" component={CreateTask} />
         </Stack.Navigator>
       ) : (
         <Stack.Navigator

@@ -1,12 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
-import {
-  FlatList,
-  Image,
-  SafeAreaView,
-  Switch,
-  Text,
-  View,
-} from 'react-native';
+import React, { useCallback, useContext, useState } from 'react';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { FlatList, Image, SafeAreaView, Text, View } from 'react-native';
 
 import styles from './styles';
 import t from '../../services/translate';
@@ -15,16 +9,18 @@ import { AuthContext } from '../../context';
 import { getTask } from '../../services/api';
 import images from '../../assets';
 import Item from '../../components/item';
-import Loader from '../../components/loader';
 
 const Home = () => {
   const [task, setTask] = useState('');
   const [appLoading, setAppLoading] = useState(false);
   const { logout } = useContext(AuthContext);
+  const { navigate } = useNavigation();
 
-  useEffect(() => {
-    getAllTask();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      getAllTask();
+    }, []),
+  );
 
   const getAllTask = () => {
     setAppLoading(true);
@@ -37,7 +33,7 @@ const Home = () => {
       .finally(() => setAppLoading(false));
   };
 
-  const renderItem = ({ item }) => <Item title={item.description} />;
+  const renderItem = ({ item }) => <Item item={item} onPress={() => navigate('CreateTask')} />;
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -50,6 +46,12 @@ const Home = () => {
         refreshing={appLoading}
         onRefresh={getAllTask}
       />
+      <View style={styles.buttonContainer}>
+        <Button
+          onPress={() => navigate('CreateTask')}
+          textKey={t('Create New Task')}
+        />
+      </View>
       <View style={styles.buttonContainer}>
         <Button onPress={logout} textKey={t('Logout')} />
       </View>

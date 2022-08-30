@@ -10,6 +10,7 @@ const HEADERS = {
 const REGISTER_URL = '/user/register';
 const LOGIN_URL = '/user/login';
 const GET_TASK = '/task';
+const CREATE_TASK = '/task';
 
 const instance = axios.create({
   baseURL: BASE_URL,
@@ -33,4 +34,8 @@ const getTask = () => {
   return instance.get(GET_TASK);
 };
 
-export { userRegister, userLogin, getTask };
+const createTask = data => {
+  return instance.post(CREATE_TASK, data);
+};
+
+export { userRegister, userLogin, getTask, createTask };
