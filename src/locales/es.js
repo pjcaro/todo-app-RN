@@ -43,6 +43,6 @@ export default {
     logout: 'Logout exitoso'
   },
   home: {
-    welcome: 'Bienvenido!'
+    title: 'Tu lista de Tareas'
   }
 };

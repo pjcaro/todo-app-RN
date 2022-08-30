@@ -1,24 +1,47 @@
-import React, { useContext } from 'react';
-import { Image, Text, View } from 'react-native';
+import React, { useContext, useEffect, useState } from 'react';
+import { FlatList, Image, SafeAreaView, Text, View } from 'react-native';
 
 import styles from './styles';
 import t from '../../services/translate';
-import images from '../../assets';
-import BackgroundView from '../../containers/backgroundView';
 import Button from '../../components/button';
 import { AuthContext } from '../../context';
+import { getTask } from '../../services/api';
+import images from '../../assets';
+import Item from '../../components/item';
+import Loader from '../../components/loader';
 
 const Home = () => {
+  const [task, setTask] = useState('');
+  const [apploading, setAppLoading] = useState(true);
   const { logout } = useContext(AuthContext);
 
-  return (
-    <BackgroundView>
-      <View style={styles.info}>
-        <Image source={images.onboarding} style={styles.image} />
-        <Text style={styles.title}>{t('home.welcome')}</Text>
+  useEffect(() => {
+    getTask()
+      .then(res => {
+        const { data } = res.data;
+        setTask(data);
+      })
+      .catch(console.error);
+    setAppLoading(false);
+  }, []);
+
+  const renderItem = ({ item }) => <Item title={item.description} />;
+
+  return apploading ? (
+    <Loader />
+  ) : (
+    <SafeAreaView style={{ flex: 1 }}>
+      <Image source={images.elipse} style={styles.elipse} />
+      <Text style={styles.title}>{t('home.title')}</Text>
+      <FlatList
+        data={task}
+        renderItem={renderItem}
+        keyExtractor={item => item._id}
+      />
+      <View style={styles.buttonContainer}>
+        <Button onPress={logout} textKey={t('Logout')} />
       </View>
-      <Button onPress={logout} textKey={t('Logout')} />
-    </BackgroundView>
+    </SafeAreaView>
   );
 };
 
