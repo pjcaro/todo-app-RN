@@ -1,5 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { FlatList, Image, SafeAreaView, Text, View } from 'react-native';
+import {
+  FlatList,
+  Image,
+  SafeAreaView,
+  Switch,
+  Text,
+  View,
+} from 'react-native';
 
 import styles from './styles';
 import t from '../../services/translate';
@@ -12,24 +19,27 @@ import Loader from '../../components/loader';
 
 const Home = () => {
   const [task, setTask] = useState('');
-  const [apploading, setAppLoading] = useState(true);
+  const [appLoading, setAppLoading] = useState(false);
   const { logout } = useContext(AuthContext);
 
   useEffect(() => {
+    getAllTask();
+  }, []);
+
+  const getAllTask = () => {
+    setAppLoading(true);
     getTask()
       .then(res => {
         const { data } = res.data;
         setTask(data);
       })
-      .catch(console.error);
-    setAppLoading(false);
-  }, []);
+      .catch(console.error)
+      .finally(() => setAppLoading(false));
+  };
 
   const renderItem = ({ item }) => <Item title={item.description} />;
 
-  return apploading ? (
-    <Loader />
-  ) : (
+  return (
     <SafeAreaView style={{ flex: 1 }}>
       <Image source={images.elipse} style={styles.elipse} />
       <Text style={styles.title}>{t('home.title')}</Text>
@@ -37,6 +47,8 @@ const Home = () => {
         data={task}
         renderItem={renderItem}
         keyExtractor={item => item._id}
+        refreshing={appLoading}
+        onRefresh={getAllTask}
       />
       <View style={styles.buttonContainer}>
         <Button onPress={logout} textKey={t('Logout')} />

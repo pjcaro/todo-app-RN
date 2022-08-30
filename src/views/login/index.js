@@ -13,28 +13,36 @@ import { AuthContext } from '../../context';
 import { showFlashMessage } from '../../components/flashMessage';
 
 const Login = () => {
-  const [email, setEmail] = useState('facu@mail.com');
+  const [email, setEmail] = useState('test1@mail.com');
   const [password, setPassword] = useState('1234567');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+
   const { login } = useContext(AuthContext);
   const { navigate } = useNavigation();
 
-  const onSubmit = async () => {
-    setErrorMessage('');
-
+  const validate = () => {
     if (password.length == 0) {
       showFlashMessage({
         message: t('input_validation.password_required'),
         type: 'danger',
       });
-      return;
+      return false;
     } else if (password.length < 7) {
       showFlashMessage({
         message: t('input_validation.password_length'),
         type: 'danger',
       });
+      return false;
+    }
+
+    return true;
+  };
+
+  const onSubmit = async () => {
+    if (!validate()) {
       return;
     }
+    setLoading(true);
 
     const data = {
       email: email,
@@ -45,12 +53,13 @@ const Login = () => {
       login({ ...response.data });
       console.tron.log('response: ', response);
     } catch (e) {
-      setErrorMessage(e.response.data);
       showFlashMessage({
         message: e.response.data,
         type: 'danger',
       });
       console.tron.log('error: ', e.response.data);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -80,7 +89,7 @@ const Login = () => {
         />
       </View>
       <View style={styles.buttonContainer}>
-        <Button onPress={onSubmit} textKey="sign_in.button" />
+        <Button onPress={onSubmit} textKey="sign_in.button" loading={loading} />
         <View style={{ flexDirection: 'row' }}>
           <Text style={styles.textQuestion}>{t('sign_in.question')}</Text>
           <Link
