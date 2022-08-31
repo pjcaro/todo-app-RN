@@ -56,4 +56,7 @@ export default {
     button: 'Edit Task',
     return: 'Return',
   },
+  form: {
+    switch_text: 'Completed'
+  }
 };

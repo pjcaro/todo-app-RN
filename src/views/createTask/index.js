@@ -9,6 +9,7 @@ import InputForm from '../../components/input';
 import { useNavigation } from '@react-navigation/native';
 import { createTask } from '../../services/api';
 import { showFlashMessage } from '../../components/flashMessage';
+import Form from '../../components/form';
 
 const CreateTask = () => {
   const [task, setTask] = useState('');
@@ -34,23 +35,13 @@ const CreateTask = () => {
 
   return (
     <BackgroundView>
-      <View style={styles.inputContainer}>
-        <InputForm
-          text={task}
-          onChangeText={setTask}
-          placeholder={t('create_task.placeholder')}
-        />
-        <View style={{ marginTop: 20 }}>
-          <Switch
-            trackColor={{ false: '#767577', true: '#81b0ff' }}
-            thumbColor={isCompleted ? '#f5dd4b' : '#f4f3f4'}
-            ios_backgroundColor="#3e3e3e"
-            onValueChange={toggleSwitch}
-            value={isCompleted}
-          />
-        </View>
-        <Text>Completed</Text>
-      </View>
+      <Form
+        task={task}
+        setTask={setTask}
+        toggleSwitch={toggleSwitch}
+        isCompleted={isCompleted}
+        text={t('form.switch_text')}
+      />
       <View style={styles.buttonContainer}>
         <Button onPress={onSubmit} textKey="create_task.button" />
       </View>

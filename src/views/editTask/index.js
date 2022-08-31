@@ -8,6 +8,7 @@ import BackgroundView from '../../containers/backgroundView';
 import InputForm from '../../components/input';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { editTask, getTaskById } from '../../services/api';
+import Form from '../../components/form';
 
 const EditTask = () => {
   const [task, setTask] = useState('');
@@ -45,19 +46,13 @@ const EditTask = () => {
 
   return (
     <BackgroundView>
-      <View style={styles.inputContainer}>
-        <InputForm text={task} onChangeText={setTask} />
-        <View style={{ marginTop: 20 }}>
-          <Switch
-            trackColor={{ false: '#767577', true: '#81b0ff' }}
-            thumbColor={isCompleted ? '#f5dd4b' : '#f4f3f4'}
-            ios_backgroundColor="#3e3e3e"
-            onValueChange={toggleSwitch}
-            value={isCompleted}
-          />
-        </View>
-        <Text>Completed</Text>
-      </View>
+      <Form
+        task={task}
+        setTask={setTask}
+        toggleSwitch={toggleSwitch}
+        isCompleted={isCompleted}
+        text={t('form.switch_text')}
+      />
       <View style={styles.buttonContainer}>
         <Button onPress={onSubmit} textKey="edit_task.button" />
       </View>
