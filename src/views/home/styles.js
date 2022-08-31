@@ -21,6 +21,22 @@ const styles = {
     left: -100,
     top: -100,
   },
+  button: {
+    width: 80,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonText: {
+    fontWeight: 'bold',
+  },
+  button3Text: {
+    color: 'black',
+  },
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
 };
 
 export default styles;

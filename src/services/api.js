@@ -12,7 +12,8 @@ const LOGIN_URL = '/user/login';
 const GET_TASK = '/task';
 const CREATE_TASK = '/task';
 const EDIT_TASK = '/task';
-const GET_TASK_BY_ID = `/task`;
+const GET_TASK_BY_ID = '/task';
+const DELETE_TASK = '/task'
 
 const instance = axios.create({
   baseURL: BASE_URL,
@@ -48,4 +49,8 @@ const getTaskById = (id) => {
   return instance.get(`${GET_TASK_BY_ID}/${id}`)
 }
 
-export { userRegister, userLogin, getTask, createTask, editTask, getTaskById };
+const deleteTask = (id) => {
+  return instance.delete(`${DELETE_TASK}/${id}`)
+}
+
+export { userRegister, userLogin, getTask, createTask, editTask, getTaskById, deleteTask };
