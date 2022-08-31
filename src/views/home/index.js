@@ -33,7 +33,9 @@ const Home = () => {
       .finally(() => setAppLoading(false));
   };
 
-  const renderItem = ({ item }) => <Item item={item} onPress={() => navigate('CreateTask')} />;
+  const renderItem = ({ item }) => (
+    <Item item={item} onPress={() => navigate('EditTask', { item: item._id })} />
+  );
 
   return (
     <SafeAreaView style={{ flex: 1 }}>

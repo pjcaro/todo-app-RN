@@ -37,7 +37,7 @@ export default {
     password_length: 'La contraseña no puede ser menor a 7 caracteres',
     password_compare: 'Las contraseñas no coinciden',
     backend_error: 'Error',
-    task_required: 'Task cannot be empty'
+    task_required: 'Task cannot be empty',
   },
   alerts: {
     login: 'Login exitoso',
@@ -47,8 +47,13 @@ export default {
     title: 'Tu lista de Tareas',
   },
   create_task: {
-    placeholder_create_task: 'Add task',
+    placeholder: 'Add task',
     button: 'Create Task',
-    return: 'Return'
+    return: 'Return',
+  },
+  edit_task: {
+    placeholder: 'Edit task',
+    button: 'Edit Task',
+    return: 'Return',
   },
 };
