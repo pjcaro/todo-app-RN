@@ -9,6 +9,7 @@ import {
   View,
 } from 'react-native';
 import SwipeableFlatList from 'react-native-swipeable-list';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './styles';
 import t from '../../services/translate';
@@ -17,12 +18,15 @@ import { AuthContext } from '../../context';
 import { deleteTask, getTask } from '../../services/api';
 import images from '../../assets';
 import Item from '../../components/item';
+import { getTasksAction } from '../../store/actions/tasks';
 
 const Home = () => {
-  const [task, setTask] = useState('');
-  const [appLoading, setAppLoading] = useState(false);
+  // const [task, setTask] = useState('');
+  // const [appLoading, setAppLoading] = useState(false);
   const { logout } = useContext(AuthContext);
   const { navigate } = useNavigation();
+  const dispatch = useDispatch();
+  const { tasks, isLoading } = useSelector(store => store.taskReducer);
 
   useFocusEffect(
     useCallback(() => {
@@ -30,15 +34,19 @@ const Home = () => {
     }, []),
   );
 
+  // const getAllTask = () => {
+  //   setAppLoading(true);
+  //   getTask()
+  //     .then(res => {
+  //       const { data } = res.data;
+  //       setTask(data);
+  //     })
+  //     .catch(console.error)
+  //     .finally(() => setAppLoading(false));
+  // };
+
   const getAllTask = () => {
-    setAppLoading(true);
-    getTask()
-      .then(res => {
-        const { data } = res.data;
-        setTask(data);
-      })
-      .catch(console.error)
-      .finally(() => setAppLoading(false));
+    dispatch(getTasksAction());
   };
 
   const deleteItem = _id => {
@@ -86,10 +94,10 @@ const Home = () => {
       <Image source={images.elipse} style={styles.elipse} />
       <Text style={styles.title}>{t('home.title')}</Text>
       <SwipeableFlatList
-        data={task}
+        data={tasks}
         renderItem={renderItem}
         keyExtractor={item => item._id}
-        refreshing={appLoading}
+        refreshing={isLoading}
         onRefresh={getAllTask}
         maxSwipeDistance={50}
         renderQuickActions={item => QuickActions(item)}
