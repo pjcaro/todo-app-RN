@@ -34,17 +34,6 @@ const Home = () => {
     }, []),
   );
 
-  // const getAllTask = () => {
-  //   setAppLoading(true);
-  //   getTask()
-  //     .then(res => {
-  //       const { data } = res.data;
-  //       setTask(data);
-  //     })
-  //     .catch(console.error)
-  //     .finally(() => setAppLoading(false));
-  // };
-
   const getAllTask = () => {
     dispatch(getTasksAction());
   };

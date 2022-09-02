@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Switch, Text, View } from 'react-native';
+import { useSelector } from 'react-redux';
 
 import styles from './styles';
 import t from '../../services/translate';
 import Button from '../../components/button';
 import BackgroundView from '../../containers/backgroundView';
-import InputForm from '../../components/input';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { editTask, getTaskById } from '../../services/api';
 import Form from '../../components/form';
@@ -17,24 +17,15 @@ const EditTask = () => {
   const [appLoading, setAppLoading] = useState(false);
   const route = useRoute();
   const { item } = route.params;
+  const { tasks, isLoading } = useSelector(store => store.taskReducer);
 
   const toggleSwitch = () => setIsCompleted(previousState => !previousState);
 
   useEffect(() => {
-    getTask();
+    const data = tasks.find(tasks => tasks._id == item);
+    setTask(data.description);
+    setIsCompleted(data.completed);
   }, []);
-
-  const getTask = () => {
-    setAppLoading(true);
-    getTaskById(item)
-      .then(res => {
-        const { data } = res.data;
-        setTask(data.description);
-        setIsCompleted(data.completed);
-      })
-      .catch(console.error)
-      .finally(() => setAppLoading(false));
-  };
 
   const onSubmit = () => {
     const data = {
