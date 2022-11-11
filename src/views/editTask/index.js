@@ -9,6 +9,7 @@ import InputForm from '../../components/input';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { editTask, getTaskById } from '../../services/api';
 import Form from '../../components/form';
+import { useSelector } from 'react-redux';
 
 const EditTask = () => {
   const [task, setTask] = useState('');
@@ -17,23 +18,20 @@ const EditTask = () => {
   const [appLoading, setAppLoading] = useState(false);
   const route = useRoute();
   const { item } = route.params;
+  const { tasks, isLoading } = useSelector(store => store.taskReducer);
 
   const toggleSwitch = () => setIsCompleted(previousState => !previousState);
 
   useEffect(() => {
+    // getTask();
     getTask();
   }, []);
 
   const getTask = () => {
-    setAppLoading(true);
-    getTaskById(item)
-      .then(res => {
-        const { data } = res.data;
-        setTask(data.description);
-        setIsCompleted(data.completed);
-      })
-      .catch(console.error)
-      .finally(() => setAppLoading(false));
+    const tarea = tasks.find(element => element.id === item.id);
+    console.tron.log('tarea: ', tarea);
+    setTask(tarea.description);
+    setIsCompleted(tarea.completed);
   };
 
   const onSubmit = () => {

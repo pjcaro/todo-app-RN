@@ -109,6 +109,12 @@ const Home = () => {
         />
       </View>
       <View style={styles.buttonContainer}>
+        <Button
+          onPress={() => navigate('UploadImage')}
+          textKey={t('home.button')}
+        />
+      </View>
+      <View style={styles.buttonContainer}>
         <Button onPress={logout} textKey={t('Logout')} />
       </View>
     </SafeAreaView>

@@ -45,6 +45,7 @@ export default {
   },
   home: {
     title: 'Tu lista de Tareas',
+    button: 'Sacar una foto',
   },
   create_task: {
     placeholder: 'Add task',
@@ -57,6 +58,10 @@ export default {
     return: 'Return',
   },
   form: {
-    switch_text: 'Completed'
-  }
+    switch_text: 'Completed',
+  },
+  upload_image: {
+    button_foto: 'Sacar una foto',
+    button_subir_foto: 'Subir una imagen',
+  },
 };

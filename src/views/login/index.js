@@ -21,7 +21,7 @@ const Login = () => {
   const { navigate } = useNavigation();
 
   const validate = () => {
-    if (password.length == 0) {
+    if (password.length === 0) {
       showFlashMessage({
         message: t('input_validation.password_required'),
         type: 'danger',

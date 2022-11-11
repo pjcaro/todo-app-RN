@@ -10,6 +10,7 @@ import LocalStorage from '../services/localStorage';
 import { ActivityIndicator, View } from 'react-native';
 import CreateTask from '../views/createTask';
 import EditTask from '../views/editTask';
+import UploadImage from '../views/uploadImage';
 
 const Stack = createNativeStackNavigator();
 
@@ -45,6 +46,7 @@ const Navigator = () => {
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="CreateTask" component={CreateTask} />
           <Stack.Screen name="EditTask" component={EditTask} />
+          <Stack.Screen name="UploadImage" component={UploadImage} />
         </Stack.Navigator>
       ) : (
         <Stack.Navigator
